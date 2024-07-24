@@ -1,0 +1,114 @@
+.about {
+  height: calc(100% - var(--nav-height));
+  padding: 25px;
+  padding-bottom: 8px;
+
+  .left-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .title {
+      width: 200px;
+      line-height: normal;
+      text-align: center;
+    }
+  }
+  .right-content {
+    .section-heading h2 {
+      font-family: 'Playpen Sans', sans-serif;
+      font-size: 24px;
+      font-weight: 600;
+      text-transform: capitalize;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #e5ebf2;
+    }
+    .aboutMe-txt {
+      text-align: justify;
+    }
+
+    .experience-card {
+      line-height: normal;
+      .card-text {
+        border-top: 1px solid #e5ebf2;
+      }
+      .off-loc {
+        font-size: 14px;
+      }
+      .job-title {
+        font-size: 15px;
+        font-weight: 500;
+      }
+      .job-date {
+        font-size: 13px;
+      }
+      .job-desc {
+        font-size: 15px;
+      }
+    }
+    .education {
+      margin-bottom: 1rem;
+
+      #tarumt {
+        background-image: url(../images/logos/tarumt.png);
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: contain;
+      }
+
+      .education-card {
+        .card-body {
+          background-color: rgba(255, 255, 255, 0.9);
+        }
+        .edu-detail {
+          line-height: normal;
+          .edu-title {
+            font-size: 15px;
+          }
+          .edu-desc {
+            font-size: 13px;
+          }
+        }
+      }
+    }
+  }
+}
+
+.about-list-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 90px;
+  background: #1f2c6c;
+
+  ul {
+    padding: 0;
+    margin: 0 auto;
+    list-style: none;
+  }
+
+  ul li {
+    list-style: none;
+  }
+}
+
+.about-list-icon ul {
+  display: flex;
+}
+
+@media (min-width: 768px) {
+  .col-sm-5 {
+    width: 41.66666667%;
+  }
+}
+@media screen and (min-width: 768px) {
+  .left-content {
+    position: fixed;
+  }
+  .right-content {
+    transform: translateX(50%);
+  }
+}
