@@ -8,7 +8,7 @@ Designed for clarity and engagement, it highlights my expertise in HTML, CSS, an
 <br/>
 Whether you're here to learn more about my background, explore my skills, or get in touch, I hope you find this site both informative and visually appealing.
 
-
+#### Website URL &#8658; https://h-chinxin.github.io/portfolio/
 
 
 ## Recommended IDE Setup
@@ -35,10 +35,4 @@ npm run dev
 
 ```sh
 npm run build
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
 ```
