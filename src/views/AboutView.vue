@@ -99,7 +99,7 @@
                 <span class="card-subtitle text-muted off-loc">Petaling Jaya</span>
                 <div class="card-text d-flex flex-column mt-2 pt-2">
                   <span class="job-title">Consultant, Solutions Development</span>
-                  <span class="job-date">July 2024 — Feb 2024</span>
+                  <span class="job-date">July 2022 — Feb 2024</span>
                   <p class="job-desc m-0 my-2">
                     &bull; Designed and implemented frontend and backend functionality for data
                     visualization software, using technologies such as ASP.NET MVC, ASP.NET Core, and
