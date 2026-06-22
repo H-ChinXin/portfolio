@@ -1,7 +1,89 @@
 <script setup>
-import { reactive } from 'vue'
+import { reactive, ref, onMounted, onUnmounted, nextTick } from 'vue'
 import emailjs from '@emailjs/browser'
 import Swal from 'sweetalert2'
+import resumeUrl from '@/assets/resume/Hew_Chin_Xin-Software_Developer-Resume.pdf'
+
+const LINKEDIN_BADGE_SCRIPT = 'https://platform.linkedin.com/badges/js/profile.js'
+const LINKEDIN_BADGE_LOAD_TIMEOUT_MS = 8000
+
+const linkedInBadgeRef = ref(null)
+const badgeFailed = ref(false)
+let badgeLoadTimeoutId = null
+let badgeObserver = null
+
+const clearBadgeLoadTimeout = () => {
+  if (badgeLoadTimeoutId !== null) {
+    window.clearTimeout(badgeLoadTimeoutId)
+    badgeLoadTimeoutId = null
+  }
+}
+
+const disconnectBadgeObserver = () => {
+  badgeObserver?.disconnect()
+  badgeObserver = null
+}
+
+const watchForBadgeIframe = () => {
+  const badgeRoot = linkedInBadgeRef.value
+  if (!badgeRoot) return
+
+  disconnectBadgeObserver()
+  badgeObserver = new MutationObserver(() => {
+    if (badgeRoot.querySelector('iframe')) {
+      badgeFailed.value = false
+      clearBadgeLoadTimeout()
+      disconnectBadgeObserver()
+    }
+  })
+  badgeObserver.observe(badgeRoot, { childList: true, subtree: true })
+}
+
+const scheduleBadgeFailureCheck = () => {
+  clearBadgeLoadTimeout()
+  badgeLoadTimeoutId = window.setTimeout(() => {
+    const badgeRoot = linkedInBadgeRef.value
+    badgeFailed.value = !badgeRoot?.querySelector('iframe')
+  }, LINKEDIN_BADGE_LOAD_TIMEOUT_MS)
+}
+
+const loadLinkedInBadge = () => {
+  const badgeRoot = linkedInBadgeRef.value
+  if (!badgeRoot) return
+
+  badgeFailed.value = false
+
+  if (badgeRoot.querySelector('iframe')) {
+    return
+  }
+
+  document
+    .querySelectorAll(`script[src="${LINKEDIN_BADGE_SCRIPT}"]`)
+    .forEach((script) => script.remove())
+
+  const script = document.createElement('script')
+  script.src = LINKEDIN_BADGE_SCRIPT
+  script.async = true
+  script.defer = true
+  script.onload = scheduleBadgeFailureCheck
+  script.onerror = () => {
+    badgeFailed.value = true
+  }
+  document.body.appendChild(script)
+
+  watchForBadgeIframe()
+  scheduleBadgeFailureCheck()
+}
+
+onMounted(async () => {
+  await nextTick()
+  loadLinkedInBadge()
+})
+
+onUnmounted(() => {
+  clearBadgeLoadTimeout()
+  disconnectBadgeObserver()
+})
 
 const formData = reactive({
   name: '',
@@ -25,9 +107,24 @@ const validateForm = () => {
 
 
   if (isNameValid && isEmailValid && isSubjectValid && isMessageValid) {
+    const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID
+    const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID
+    const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+
+    if (!serviceId || !templateId || !publicKey) {
+      Swal.fire({
+        title: 'Configuration Error',
+        text: 'The contact form is not configured. Please try again later or reach out on LinkedIn.',
+        icon: 'error',
+        confirmButtonText: 'Ok',
+        timer: 5000
+      })
+      return
+    }
+
     emailjs
-      .send('service_8zhpwct', 'template_wyvlcup', templateParams, {
-        publicKey: 'VjiZhUDL62aon6uBi'
+      .send(serviceId, templateId, templateParams, {
+        publicKey
       })
       .then(
         (response) => {
@@ -117,7 +214,7 @@ const messageValidation = () => {
       <div>
         Whether you have questions, want to collaborate on a project, or just-saying-hi’s, feel free
         to reach out. You can also reach me through any of of my contact information in my
-        <a id="resume" :href="require('../assets/resume/Hew_Chin_Xin-Software_Developer-Resume.pdf')"
+        <a id="resume" :href="resumeUrl"
           type="application/pdf" target="_blank"
           download="Hew_Chin_Xin-Software_Developer-Resume.pdf"><font-awesome-icon
             icon="fa-solid fa-file-arrow-down" />resume.
@@ -126,15 +223,25 @@ const messageValidation = () => {
       <div class="row pt-4 justify-content-center flex-md-nowrap">
         <div class="col-12 col-md-5 col-sm-12 ml-md-3 p-0 pl-md-4 section-LI">
           <h6>Connect with me on LinkedIn</h6>
-          <div class="badge-base LI-profile-badge" data-locale="en_US" data-size="medium" data-theme="light"
-            data-type="VERTICAL" data-vanity="chin-xin-hew-a48601197" data-version="v1">
-            <a class="badge-base__link LI-simple-link"
-              href="https://my.linkedin.com/in/chin-xin-hew-a48601197?trk=profile-badge" target="_blank">Chin Xin
-              Hew</a>
-            <div class="LI-profile-badge-error">
-              Hi, if you're reading this, it means the LinkedIn Profile Badge is broken again. You
-              can click on the link above to be redirected to my LinkedIn profile or reload the page. Sorry for the inconvenience.
-            </div>
+          <div
+            ref="linkedInBadgeRef"
+            class="badge-base LI-profile-badge"
+            data-locale="en_US"
+            data-size="medium"
+            data-theme="light"
+            data-type="VERTICAL"
+            data-vanity="chin-xin-hew-a48601197"
+            data-version="v1"
+          >
+            <a
+              class="badge-base__link LI-simple-link"
+              href="https://www.linkedin.com/in/chin-xin-hew-a48601197/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >Chin Xin Hew</a>
+            <p v-if="badgeFailed" class="LI-profile-badge-error" role="status">
+              The LinkedIn badge could not be loaded. You can still visit my profile using the link above.
+            </p>
           </div>
         </div>
         <div class="col-12 col-md-1 col-sm-12 px-0 mx-2">
@@ -198,7 +305,7 @@ const messageValidation = () => {
       </div>
     </div>
     <div class="contact-footer p-2 text-center">
-      <p class="copyright m-0">Copyright &copy; 2024 Hew Chin Xin. All Rights Reserved</p>
+      <p class="copyright m-0">Copyright &copy; 2026 Hew Chin Xin. All Rights Reserved</p>
     </div>
   </div>
 </template>

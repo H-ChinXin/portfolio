@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import AboutView from '../views/AboutView.vue'
 import SkillsView from '../views/SkillsView.vue'
+import ProjectsView from '../views/ProjectsView.vue'
 import ContactView from '../views/ContactView.vue'
 
 const router = createRouter({
@@ -12,38 +13,45 @@ const router = createRouter({
       name: 'home',
       component: HomeView,
       meta: {
-        title: 'Full Stack Developer Portfolio | Home',
-        // transition: 'slide-right'
+        title: 'Full Stack Developer Portfolio | Home'
       }
     },
     {
-      path: '/#about',
+      path: '/about',
       name: 'about',
       component: AboutView,
       meta: {
-        title: 'Full Stack Developer Portfolio | About',
-        // transition: 'slide-left'
+        title: 'Full Stack Developer Portfolio | About'
       }
     },
     {
-      path: '/#skills',
+      path: '/skills',
       name: 'skills',
       component: SkillsView,
       meta: {
-        title: 'Full Stack Developer Portfolio | Skills',
-        // transition: 'slide-right'
+        title: 'Full Stack Developer Portfolio | Skills'
       }
     },
     {
-      path: '/#contact',
+      path: '/projects',
+      name: 'projects',
+      component: ProjectsView,
+      meta: {
+        title: 'Full Stack Developer Portfolio | Projects'
+      }
+    },
+    {
+      path: '/contact',
       name: 'contact',
       component: ContactView,
       meta: {
-        title: 'Full Stack Developer Portfolio | Contact Me',
-        // transition: 'slide-left'
+        title: 'Full Stack Developer Portfolio | Contact Me'
       }
     }
-  ]
+  ],
+  scrollBehavior() {
+    return { top: 0 }
+  }
 })
 
 router.beforeEach((to) => {

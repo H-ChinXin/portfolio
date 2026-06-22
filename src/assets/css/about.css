@@ -7,44 +7,87 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+
     .title {
       width: 200px;
       line-height: normal;
       text-align: center;
     }
-  }
-  .right-content {
-    .section-heading h2 {
-      font-family: 'Playpen Sans', sans-serif;
-      font-size: 24px;
-      font-weight: 600;
-      text-transform: capitalize;
-      padding-bottom: 10px;
-      border-bottom: 1px solid #e5ebf2;
+
+    .social-links a {
+      margin: 0 0.25rem;
     }
+  }
+
+  .right-content {
     .aboutMe-txt {
       text-align: justify;
     }
 
+    .experience-timeline {
+      position: relative;
+      padding-left: 1.25rem;
+      border-left: 2px solid var(--color-border);
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 1.5rem;
+    }
+
+    .timeline-marker {
+      position: absolute;
+      left: calc(-1.25rem - 7px);
+      top: 1.25rem;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--color-accent);
+      border: 2px solid var(--color-surface);
+      box-shadow: 0 0 0 2px var(--color-border);
+    }
+
     .experience-card {
       line-height: normal;
-      .card-text {
-        border-top: 1px solid #e5ebf2;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-card);
+      transition: box-shadow 0.2s ease, transform 0.2s ease;
+
+      &:hover {
+        box-shadow: var(--shadow-card-hover);
+        transform: translateY(-2px);
       }
+
+      .card-text {
+        border-top: 1px solid var(--color-border);
+      }
+
+      .role-divider {
+        margin-top: 1rem;
+        padding-top: 1rem;
+      }
+
       .off-loc {
         font-size: 14px;
       }
+
       .job-title {
         font-size: 15px;
-        font-weight: 500;
+        font-weight: 600;
+        color: var(--color-primary);
       }
+
       .job-date {
         font-size: 13px;
+        color: var(--color-text-muted);
       }
+
       .job-desc {
         font-size: 15px;
       }
     }
+
     .education {
       margin-bottom: 1rem;
 
@@ -56,14 +99,21 @@
       }
 
       .education-card {
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius-md);
+        box-shadow: var(--shadow-card);
+
         .card-body {
-          background-color: rgba(255, 255, 255, 0.9);
+          background-color: rgba(255, 255, 255, 0.92);
         }
+
         .edu-detail {
           line-height: normal;
+
           .edu-title {
             font-size: 15px;
           }
+
           .edu-desc {
             font-size: 13px;
           }
@@ -78,37 +128,20 @@
   justify-content: center;
   align-items: center;
   position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 90px;
-  background: #1f2c6c;
-
-  ul {
-    padding: 0;
-    margin: 0 auto;
-    list-style: none;
-  }
-
-  ul li {
-    list-style: none;
-  }
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
-.about-list-icon ul {
-  display: flex;
-}
-
-@media (min-width: 768px) {
-  .col-sm-5 {
-    width: 41.66666667%;
-  }
-}
 @media screen and (min-width: 768px) {
-  .left-content {
-    position: fixed;
+  .about {
   }
-  .right-content {
-    transform: translateX(50%);
+}
+
+@media screen and (max-width: 767px) {
+  .about {
+    .left-content {
+      margin-bottom: 1rem;
+    }
   }
 }
