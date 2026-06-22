@@ -1,8 +1,8 @@
 <script setup>
 import { ref, onMounted } from 'vue'
-import { RouterLink, useRouter } from 'vue-router'
+import { RouterLink } from 'vue-router'
+import resumeUrl from '@/assets/resume/Hew_Chin_Xin-Software_Developer-Resume.pdf'
 
-const router = useRouter();
 var TxtType = function (el, toRotate, period) {
   this.toRotate = toRotate
   this.el = el
@@ -12,7 +12,12 @@ var TxtType = function (el, toRotate, period) {
   this.tick()
   this.isDeleting = false
 }
-const introSentences = ref(['I Love to Develop', 'I am Quick Learner', "I'm a matcha lover"])
+
+const introSentences = ref([
+  'Full Stack Developer',
+  'Vue.js · REST APIs · Docker',
+  'XML · Integrations · CI/CD'
+])
 
 TxtType.prototype.tick = function () {
   var i = this.loopNum % this.toRotate.length
@@ -48,26 +53,23 @@ TxtType.prototype.tick = function () {
 }
 
 onMounted(() => {
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
   var elements = document.getElementsByClassName('typewrite')
-  for (var i = 0; i < elements.length; i++) {
-    var toRotate = introSentences.value
-    var period = 2000
-    if (toRotate) {
-      new TxtType(elements[i], toRotate, period)
-    }
-  }
 
-  var css = document.createElement('style')
-  css.innerHTML = '.typewrite > .wrap { border-right: 0.08em solid #fff}'
-  document.body.appendChild(css)
-
-  if (window.location.hash) {
-    const viewingSection = window.location.hash.substring(1);
-    if (router.hasRoute(viewingSection)) {
-      router.push({name: viewingSection})
-    } else {
-      window.history.replaceState(null, null, ' ')
+  if (!prefersReducedMotion) {
+    for (var i = 0; i < elements.length; i++) {
+      var toRotate = introSentences.value
+      var period = 2000
+      if (toRotate) {
+        new TxtType(elements[i], toRotate, period)
+      }
     }
+
+    var css = document.createElement('style')
+    css.innerHTML = '.typewrite > .wrap { border-right: 0.08em solid #fff}'
+    document.body.appendChild(css)
+  } else if (elements[0]) {
+    elements[0].innerHTML = '<span class="wrap">' + introSentences.value[0] + '</span>'
   }
 })
 </script>
@@ -81,13 +83,22 @@ onMounted(() => {
           <div class="intro-description typewrite">
             <span class="wrap"></span>
           </div>
-          <div class="mt-5">
-            <RouterLink class="button-55" aria-current="page" :to="{ name: 'about' }">Learn More</RouterLink>
+          <p class="intro-subline">3+ years building web and mobile products for cross-functional teams.</p>
+          <div class="hero-actions mt-4 d-flex flex-wrap gap-3">
+            <RouterLink class="button-55" aria-current="page" :to="{ name: 'projects' }">View Projects</RouterLink>
+            <RouterLink class="button-55 button-55-outline" aria-current="page" :to="{ name: 'about' }">Learn More</RouterLink>
+            <a
+              class="button-55 button-55-outline"
+              :href="resumeUrl"
+              type="application/pdf"
+              target="_blank"
+              download="Hew_Chin_Xin-Software_Developer-Resume.pdf"
+            >Download Resume</a>
           </div>
         </div>
       </div>
       <div class="home-footer m-2">
-        <p class="copyright m-0">Copyright &copy; 2024 Hew Chin Xin. All Rights Reserved</p>
+        <p class="copyright m-0">Copyright &copy; 2026 Hew Chin Xin. All Rights Reserved</p>
       </div>
     </section>
   </div>

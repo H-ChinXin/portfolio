@@ -1,70 +1,61 @@
 .skills {
   padding: 25px;
-  min-height: calc(100vh - 92px); /*92px = nav bar + footer*/
+  min-height: calc(100vh - 92px);
   height: 100%;
-  .section-heading h2 {
-    text-transform: capitalize;
-    border-bottom: 1px solid #e5ebf2;
-    font-family: 'Techno', sans-serif;
-    font-size: 36px;
+
+  .skill-category {
+    margin-bottom: 1.75rem;
   }
 
-  .tech-cards {
-    .tech-card {
-      line-height: normal;
-
-      .row {
-        padding: 12px;
-      }
-      .tech-logo {
-        width: 48px;
-      }
-
-      .tech-name {
-        font-size: 13px;
-        font-weight: bold;
-        font-family: 'Raleway', sans-serif;
-      }
-
-      .skill-level {
-        padding-left: 5px;
-      }
-
-      .progress {
-        --w: 200px; /* the width*/
-        --color:  /* the progress color */ linear-gradient(
-            90deg,
-            rgba(164, 211, 182, 1) 0%,
-            rgba(255, 215, 0, 1) 25%,
-            rgba(255, 69, 0, 1) 100%
-          )
-          0 / var(--w);
-        --background: lightgrey; /* the background color */
-
-        -webkit-appearance: none;
-        -moz-appearance: none;
-        appearance: none;
-        border: none;
-        width: var(--w);
-        height: 13px;
-        border-radius: 10em;
-        background: var(--background);
-      }
-      .progress-bar {
-        border-radius: 10em;
-        background: var(--color);
-        animation: loadAnimation 2s forwards;
-      }
-    }
+  .skill-category-title {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--color-primary);
+    margin-bottom: 0.85rem;
   }
 }
+
 @media screen and (min-width: 768px) {
-  .tech-cards {
-    padding: 0 8px;
+  .skills {
+    max-width: 960px;
   }
 }
-@keyframes loadAnimation {
+
+@media (prefers-reduced-motion: no-preference) {
+  .skill-category {
+    animation: fadeInUp 0.5s ease both;
+  }
+
+  .skill-category:nth-child(2) {
+    animation-delay: 0.05s;
+  }
+
+  .skill-category:nth-child(3) {
+    animation-delay: 0.1s;
+  }
+
+  .skill-category:nth-child(4) {
+    animation-delay: 0.15s;
+  }
+
+  .skill-category:nth-child(5) {
+    animation-delay: 0.2s;
+  }
+
+  .skill-category:nth-child(6) {
+    animation-delay: 0.25s;
+  }
+}
+
+@keyframes fadeInUp {
   from {
-    width: 0;
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
