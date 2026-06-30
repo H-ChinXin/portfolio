@@ -1,143 +1,210 @@
-#contact {
-  padding: 25px;
-  min-height: calc(100vh - 92px); /*92px = nav bar + footer*/
-  height: 100%;
-  align-content: center;
-  max-width: 768px;
+.contact-page {
+  max-width: 960px;
+  margin: 0 auto;
+}
 
-  .horizontal-divider {
-    flex-grow: 1;
-    height: 0.5px;
-    background-color: gray;
-    align-self: center;
-  }
+.contact-intro {
+  color: var(--color-text-muted);
+  margin-bottom: 1rem;
+}
 
-  .vertical-divider {
-    flex-grow: 1;
-    width: 0.5px;
-    background-color: #808080;
-    align-self: center;
-  }
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  align-items: start;
+  padding-top: 0.5rem;
+}
 
-  .section-LI {
-    min-width: 270px;
-    width: max-content;
-  }
-
-  .LI-profile-badge {
-    min-height: 250px;
-
-    iframe {
-      width: 270px;
-    }
-  }
-
-  .LI-profile-badge-error {
-    margin-top: 10px;
-    width: 250px;
-    font-size: 0.85rem;
-    color: var(--color-text-muted);
-    line-height: 1.4;
-  }
-
-  .section-form {
-    max-width: 385px;
-
-    .form-title {
-      font-size: 14px;
-    }
-
-    .card {
-      min-height: 360px;
-    }
-
-    input {
-      border: 0 !important;
-      outline: none;
-    }
-    input::placeholder {
-      font-size: 12px;
-    }
-    .input-group {
-      margin: 5px 0;
-      height: 40px;
-    }
-    .input-group-prepend {
-      width: 60px;
-    }
-    .input-group-text {
-      height: 100%;
-      font-size: 14px;
-      padding: 3px 6px;
-      border-top-right-radius: 0;
-      border-bottom-right-radius: 0;
-    }
-
-    .error-message {
-      font-size: 11px;
-      color: #ff0000;
-      line-height: 10px;
-      display: none;
-    }
-  }
-
-  .ql-editor {
-    height: 105px !important;
-  }
-
-  .button-80 {
-    background: #fff;
-    backface-visibility: hidden;
-    border-radius: 5px;
-    border-style: solid;
-    border-width: 1px;
-    box-sizing: border-box;
-    color: #212121;
-    cursor: pointer;
-    display: inline-block;
-    font-family: Circular, Helvetica, sans-serif;
-    font-size: 1rem;
-    font-weight: 600;
-    line-height: normal;
-    text-align: center;
-    transform: translateZ(0) scale(1);
-    transition: transform 0.2s;
-    user-select: none;
-    -webkit-user-select: none;
-    touch-action: manipulation;
-  }
-
-  .button-80:not(:disabled):hover {
-    transform: scale(1.05);
-  }
-
-  .button-80:not(:disabled):hover:active {
-    transform: scale(1.05) translateY(0.125rem);
-  }
-
-  .button-80:focus {
-    outline: 0 solid transparent;
-  }
-
-  .button-80:focus:before {
-    content: '';
-    left: calc(-1 * 0.375rem);
-    pointer-events: none;
-    position: absolute;
-    top: calc(-1 * 0.375rem);
-    transition: border-radius;
-    user-select: none;
-  }
-
-  .button-80:focus:not(:focus-visible) {
-    outline: 0 solid transparent;
-  }
-
-  .button-80:focus:not(:focus-visible):before {
-    border-width: 0;
-  }
-
-  .button-80:not(:disabled):active {
-    transform: translateY(0.125rem);
+@media screen and (min-width: 768px) {
+  .contact-grid {
+    grid-template-columns: 1fr auto 1fr;
+    gap: 2rem;
   }
 }
+
+.contact-panel {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.contact-panel__title {
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--color-primary);
+  margin-bottom: 0.75rem;
+}
+
+.contact-panel__card {
+  flex: 1;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+}
+
+.contact-panel__card .card-body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-surface);
+}
+
+.linkedin-profile-card {
+  display: block;
+  width: 100%;
+  max-width: 270px;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+  border: 1px solid var(--color-border);
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.linkedin-profile-card:hover {
+  box-shadow: var(--shadow-card-hover);
+  transform: translateY(-2px);
+  color: inherit;
+}
+
+.linkedin-profile-card__header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.65rem 0.85rem;
+  background: #0a66c2;
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.linkedin-profile-card__logo {
+  font-size: 1.1rem;
+}
+
+.linkedin-profile-card__body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1.25rem 1rem 1.5rem;
+  background: var(--color-surface);
+  text-align: center;
+}
+
+.linkedin-profile-card__photo {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 0.75rem;
+}
+
+.linkedin-profile-card__name {
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--color-text);
+  margin: 0 0 1rem;
+}
+
+.linkedin-profile-card__cta {
+  display: inline-block;
+  padding: 0.35rem 1rem;
+  border: 1px solid var(--color-text);
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-text);
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.linkedin-profile-card:hover .linkedin-profile-card__cta {
+  background: var(--color-primary-soft);
+}
+
+
+.contact-divider {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: var(--color-text-muted);
+  font-size: 0.875rem;
+}
+
+.contact-divider__line {
+  flex: 1;
+  background-color: var(--color-border);
+}
+
+@media screen and (min-width: 768px) {
+  .contact-divider {
+    flex-direction: column;
+    justify-content: center;
+    align-self: stretch;
+    padding-top: 2rem;
+    min-width: 2rem;
+  }
+
+  .contact-divider__line {
+    width: 1px;
+    flex: 1;
+    min-height: 2rem;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .contact-divider__line {
+    height: 1px;
+  }
+}
+
+.contact-form-card .ql-editor {
+  height: 105px !important;
+  background: var(--color-surface);
+  color: var(--color-text);
+}
+
+.contact-form-card .ql-toolbar {
+  border-color: var(--color-border);
+  border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+  background: var(--color-background-soft);
+}
+
+.contact-form-card .ql-container {
+  border-color: var(--color-border);
+  border-radius: 0 0 var(--radius-sm) var(--radius-sm);
+}
+
+[data-theme='dark'] .contact-form-card .ql-toolbar.ql-snow,
+[data-bs-theme='dark'] .contact-form-card .ql-toolbar.ql-snow {
+  border-color: var(--color-border);
+  background: var(--color-background-mute);
+}
+
+[data-theme='dark'] .contact-form-card .ql-container.ql-snow,
+[data-bs-theme='dark'] .contact-form-card .ql-container.ql-snow {
+  border-color: var(--color-border);
+}
+
+[data-theme='dark'] .ql-snow .ql-stroke,
+[data-bs-theme='dark'] .ql-snow .ql-stroke {
+  stroke: var(--color-text-muted);
+}
+
+[data-theme='dark'] .ql-snow .ql-fill,
+[data-bs-theme='dark'] .ql-snow .ql-fill {
+  fill: var(--color-text-muted);
+}
+
+[data-theme='dark'] .ql-snow .ql-picker,
+[data-bs-theme='dark'] .ql-snow .ql-picker {
+  color: var(--color-text);
+}
+
+[data-theme='dark'] .ql-snow .ql-picker-options,
+[data-bs-theme='dark'] .ql-snow .ql-picker-options {
+  background: var(--color-surface);
+  border-color: var(--color-border);
+}
+

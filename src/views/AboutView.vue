@@ -1,28 +1,35 @@
 <script setup>
 import { experiences } from '@/data/experience'
 import portraitUrl from '@/assets/images/portfolio/cx-potrait.webp'
+import PageLayout from '@/components/PageLayout.vue'
+import { useReveal } from '@/composables/useReveal'
+
+useReveal()
 </script>
 
 <template>
-  <div class="d-flex flex-column">
+  <PageLayout
+    title="About"
+    subtitle="Full stack developer building web and mobile products — with a love for matcha and photography."
+  >
     <div class="row flex-column flex-md-row about">
       <div id="left-content" class="col-md-4 col-sm-12 left-content">
-        <div class="single-about-img">
-          <img class="rounded" alt="Cx's LinkedIn Profile Picture" :src="portraitUrl" width="200" />
+        <div class="single-about-img reveal">
+          <img class="rounded portrait-ring" alt="Cx's LinkedIn Profile Picture" :src="portraitUrl" width="200" />
         </div>
-        <div class="d-flex justify-content-center mb-3">
+        <div class="d-flex justify-content-center mb-3 reveal">
           <div class="title text-md-start">
             <h5 class="mb-1">Hew Chin Xin</h5>
             <h6 class="mb-1">Full Stack Developer</h6>
             <div class="social-links">
               <a href="https://www.linkedin.com/in/chin-xin-hew-a48601197/" target="_blank" rel="noopener">
-                <font-awesome-icon icon="fa-brands fa-linkedin" class="text-black" size="xl" />
+                <font-awesome-icon icon="fa-brands fa-linkedin" size="xl" />
               </a>
               <a href="https://github.com/h-chinxin" target="_blank" rel="noopener">
-                <font-awesome-icon icon="fa-brands fa-github-square" class="text-black" size="xl" />
+                <font-awesome-icon icon="fa-brands fa-github-square" size="xl" />
               </a>
               <a href="mailto:hewchinxin@gmail.com">
-                <font-awesome-icon icon="fa-solid fa-envelope" class="text-black" size="xl" />
+                <font-awesome-icon icon="fa-solid fa-envelope" size="xl" />
               </a>
             </div>
           </div>
@@ -31,9 +38,9 @@ import portraitUrl from '@/assets/images/portfolio/cx-potrait.webp'
       <div id="right-content" class="col-md-8 col-sm-12 right-content">
         <section class="aboutMe">
           <div class="section-heading">
-            <h2 class="px-2">about me</h2>
+            <h2>about me</h2>
           </div>
-          <div class="aboutMe-txt px-2">
+          <div class="aboutMe-txt reveal">
             <p class="mb-4">
               Hey, it's great to meet you! I'm a full stack developer with over 3 years of hands-on
               experience delivering production web and mobile systems end to end. I collaborate
@@ -52,14 +59,14 @@ import portraitUrl from '@/assets/images/portfolio/cx-potrait.webp'
         </section>
         <section class="experience mb-3" id="experience">
           <div class="section-heading">
-            <h2 class="mb-3 px-2">experience</h2>
+            <h2 class="mb-3">experience</h2>
           </div>
-          <div class="px-2 experience-timeline">
+          <div class="experience-timeline">
             <article
               v-for="job in experiences"
               :key="job.id"
               :id="job.id"
-              class="timeline-item"
+              class="timeline-item reveal"
             >
               <div class="timeline-marker"></div>
               <div class="card experience-card">
@@ -90,10 +97,10 @@ import portraitUrl from '@/assets/images/portfolio/cx-potrait.webp'
         </section>
         <section id="education" class="education">
           <div class="section-heading">
-            <h2 class="mb-3 px-2">education</h2>
+            <h2 class="mb-3">education</h2>
           </div>
-          <div class="px-2 d-flex flex-column gap-3">
-            <div id="tarumt" class="card education-card">
+          <div class="d-flex flex-column gap-3">
+            <div id="tarumt" class="card education-card reveal">
               <div class="card-body">
                 <h5 class="card-title">Tunku Abdul Rahman University of Management and Technology</h5>
                 <div class="edu-detail d-flex flex-column pb-2">
@@ -110,8 +117,5 @@ import portraitUrl from '@/assets/images/portfolio/cx-potrait.webp'
         </section>
       </div>
     </div>
-    <div class="about-footer p-2 text-center">
-      <p class="copyright m-0">Copyright &copy; 2026 Hew Chin Xin. All Rights Reserved</p>
-    </div>
-  </div>
+  </PageLayout>
 </template>

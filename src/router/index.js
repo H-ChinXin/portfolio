@@ -4,6 +4,8 @@ import AboutView from '../views/AboutView.vue'
 import SkillsView from '../views/SkillsView.vue'
 import ProjectsView from '../views/ProjectsView.vue'
 import ContactView from '../views/ContactView.vue'
+import ProjectDetailView from '../views/ProjectDetailView.vue'
+import { getProjectById } from '../data/projects'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -41,6 +43,14 @@ const router = createRouter({
       }
     },
     {
+      path: '/projects/:id',
+      name: 'project-detail',
+      component: ProjectDetailView,
+      meta: {
+        title: 'Full Stack Developer Portfolio | Project'
+      }
+    },
+    {
       path: '/contact',
       name: 'contact',
       component: ContactView,
@@ -55,10 +65,17 @@ const router = createRouter({
 })
 
 router.beforeEach((to) => {
-  const { title } = to.meta
   const defaultTitle = 'Full Stack Developer Portfolio'
 
-  document.title = title || defaultTitle
+  if (to.name === 'project-detail' && to.params.id) {
+    const project = getProjectById(to.params.id)
+    document.title = project
+      ? `Full Stack Developer Portfolio | ${project.title}`
+      : defaultTitle
+    return
+  }
+
+  document.title = to.meta.title || defaultTitle
 })
 
 export default router

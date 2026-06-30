@@ -1,12 +1,19 @@
-.projects-page {
-  padding: 25px;
-  min-height: calc(100vh - 92px);
-}
-
 .projects-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 1.25rem;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+@media screen and (min-width: 992px) {
+  .projects-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .project-card--featured {
+    grid-column: span 2;
+  }
 }
 
 .project-card {
@@ -22,6 +29,12 @@
   }
 }
 
+.project-card-link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+
 .project-card-image {
   display: flex;
   align-items: center;
@@ -29,12 +42,18 @@
   min-height: 120px;
   padding: 1.25rem;
   background: linear-gradient(180deg, var(--color-primary-soft), transparent);
+  overflow: hidden;
 
   img {
     max-width: 140px;
     max-height: 64px;
     object-fit: contain;
+    transition: transform 0.35s ease;
   }
+}
+
+.project-card:hover .project-card-image img {
+  transform: scale(1.03);
 }
 
 .project-card-image.project-card-image--screenshot {
@@ -45,11 +64,16 @@
   img.project-screenshot {
     width: 100%;
     max-width: none;
-    max-height: 200px;
-    height: 200px;
+    max-height: 220px;
+    height: 220px;
     object-fit: cover;
     object-position: top center;
   }
+}
+
+.project-card--featured .project-card-image.project-card-image--screenshot img.project-screenshot {
+  max-height: 280px;
+  height: 280px;
 }
 
 .project-company {
@@ -71,7 +95,7 @@
   text-decoration: none;
 
   &:hover {
-    text-decoration: underline;
+    color: var(--color-accent);
   }
 }
 
@@ -85,39 +109,123 @@
   margin-top: auto;
 }
 
-@media screen and (min-width: 992px) {
-  .projects-page {
-    max-width: 1100px;
-    margin: 0 auto;
+.project-read-more {
+  display: inline-block;
+  margin-top: 0.75rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--color-accent);
+  text-decoration: none;
+
+  &:hover {
+    color: var(--color-accent-hover);
   }
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .project-card {
-    animation: fadeInUp 0.5s ease both;
-  }
+/* project detail page */
+.project-detail {
+  max-width: 900px;
+  margin: 0 auto;
+}
 
-  .project-card:nth-child(2) {
-    animation-delay: 0.06s;
-  }
+.project-detail__back {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--color-text-muted);
+  text-decoration: none;
+  margin-bottom: 1.5rem;
 
-  .project-card:nth-child(3) {
-    animation-delay: 0.12s;
-  }
-
-  .project-card:nth-child(4) {
-    animation-delay: 0.18s;
+  &:hover {
+    color: var(--color-accent);
   }
 }
 
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(12px);
+.project-detail__hero {
+  display: grid;
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
+}
+
+@media screen and (min-width: 768px) {
+  .project-detail__hero {
+    grid-template-columns: 1.2fr 1fr;
+    align-items: start;
+  }
+}
+
+.project-detail__image {
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-card);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+  padding: 1.5rem;
+  background: linear-gradient(180deg, var(--color-primary-soft), transparent);
+
+  img {
+    max-width: 180px;
+    max-height: 80px;
+    object-fit: contain;
+  }
+}
+
+.project-detail__image--screenshot {
+  padding: 0;
+  background: var(--color-border);
+
+  img {
+    width: 100%;
+    max-width: none;
+    max-height: none;
+    height: auto;
+    object-fit: cover;
+  }
+}
+
+.project-detail__company {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--color-text-muted);
+  margin-bottom: 0.25rem;
+}
+
+.project-detail__title {
+  font-family: 'Poppins', sans-serif;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 700;
+  color: var(--color-primary);
+  margin: 0;
+}
+
+.project-detail__role {
+  color: var(--color-text-muted);
+  margin-top: 0.5rem;
+  font-size: 0.95rem;
+}
+
+.project-detail__section {
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--color-border);
+
+  h2 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--color-primary);
+    margin-bottom: 0.75rem;
   }
 
-  to {
-    opacity: 1;
-    transform: translateY(0);
+  p {
+    color: var(--color-text);
+    line-height: 1.7;
+    margin: 0;
   }
 }

@@ -1,27 +1,24 @@
 <script setup>
 import { projects } from '@/data/projects'
 import ProjectCard from '@/components/ProjectCard.vue'
+import PageLayout from '@/components/PageLayout.vue'
+import { useReveal } from '@/composables/useReveal'
+
+useReveal()
 </script>
 
 <template>
-  <div class="d-flex flex-column">
-    <div class="projects-page">
-      <div class="section-heading px-2">
-        <h2>Projects</h2>
-        <p class="section-intro">
-          Selected work spanning mobile apps, full-stack platforms, and enterprise data visualization.
-        </p>
-      </div>
-      <div class="projects-grid px-2">
-        <ProjectCard
-          v-for="project in projects"
-          :key="project.id"
-          v-bind="project"
-        />
-      </div>
+  <PageLayout
+    title="Projects"
+    subtitle="Selected work spanning mobile apps, full-stack platforms, and enterprise data visualization."
+  >
+    <div class="projects-grid">
+      <ProjectCard
+        v-for="project in projects"
+        :key="project.id"
+        v-bind="project"
+        :class="{ 'project-card--featured': project.featured }"
+      />
     </div>
-    <div class="projects-footer p-2 text-center">
-      <p class="copyright m-0">Copyright &copy; 2026 Hew Chin Xin. All Rights Reserved</p>
-    </div>
-  </div>
+  </PageLayout>
 </template>

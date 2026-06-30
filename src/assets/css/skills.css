@@ -1,61 +1,84 @@
-.skills {
-  padding: 25px;
-  min-height: calc(100vh - 92px);
+.skill-category-section {
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  border-radius: var(--radius-md);
+}
+
+.skill-category-section--alt {
+  background: var(--color-primary-soft);
+}
+
+.skill-category-title {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--color-primary);
+  margin-bottom: 1.25rem;
+}
+
+.skill-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1rem;
+}
+
+.skill-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 1rem 1.15rem;
+  box-shadow: var(--shadow-card);
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.skill-card:hover {
+  box-shadow: var(--shadow-card-hover);
+  transform: translateY(-2px);
+}
+
+.skill-card__header {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  margin-bottom: 0.75rem;
+}
+
+.skill-card__icon {
+  font-size: 1.25rem;
+  color: var(--color-accent);
+  width: 1.5rem;
+  text-align: center;
+}
+
+.skill-card__name {
+  font-weight: 500;
+  font-size: 0.95rem;
+  color: var(--color-text);
+}
+
+.skill-card__bar {
+  height: 6px;
+  background: var(--color-border);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.skill-card__fill {
   height: 100%;
+  width: 0;
+  background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+  border-radius: 999px;
+  transition: width 0.8s ease;
+}
 
-  .skill-category {
-    margin-bottom: 1.75rem;
-  }
-
-  .skill-category-title {
-    font-family: 'Poppins', sans-serif;
-    font-size: 1.1rem;
-    font-weight: 600;
-    color: var(--color-primary);
-    margin-bottom: 0.85rem;
-  }
+.reveal.is-visible .skill-card__fill {
+  width: var(--fill-width);
 }
 
 @media screen and (min-width: 768px) {
-  .skills {
+  .skill-category-section {
     max-width: 960px;
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .skill-category {
-    animation: fadeInUp 0.5s ease both;
-  }
-
-  .skill-category:nth-child(2) {
-    animation-delay: 0.05s;
-  }
-
-  .skill-category:nth-child(3) {
-    animation-delay: 0.1s;
-  }
-
-  .skill-category:nth-child(4) {
-    animation-delay: 0.15s;
-  }
-
-  .skill-category:nth-child(5) {
-    animation-delay: 0.2s;
-  }
-
-  .skill-category:nth-child(6) {
-    animation-delay: 0.25s;
-  }
-}
-
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(12px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
+    margin-left: auto;
+    margin-right: auto;
   }
 }
