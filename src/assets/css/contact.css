@@ -44,11 +44,28 @@
   box-shadow: var(--shadow-card);
 }
 
-.contact-panel__card .card-body {
+.contact-panel__card:not(.contact-form-card) .card-body {
   display: flex;
   align-items: center;
   justify-content: center;
   background: var(--color-surface);
+}
+
+.contact-form-card .card-body,
+#contact-form {
+  display: block;
+  width: 100%;
+  background: var(--color-surface);
+}
+
+.contact-form-card .form-field {
+  width: 100%;
+}
+
+.contact-form-card .ql-toolbar.ql-snow,
+.contact-form-card .ql-container.ql-snow {
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .linkedin-profile-card {
